@@ -1,6 +1,5 @@
 package br.com.zup.edu.Demo.samples.kafka;
 
-import br.com.zup.edu.Demo.samples.kafka.consumer.Book;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -27,9 +26,6 @@ public class BookEvent {
     public BookEvent() {
     }
 
-    public Book toModel() {
-        return new Book(id, title, description, price);
-    }
 
     public UUID getId() {
         return id;

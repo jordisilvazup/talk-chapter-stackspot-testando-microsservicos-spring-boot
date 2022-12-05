@@ -46,6 +46,7 @@ public class KafkaIntegrationTest {
             String topic, Class<K> key, Class<V> value, Deserializer keyDeserializer, Deserializer valueDeserializer) {
 
         Map<String, Object> consumerProps = KafkaTestUtils.consumerProps(topic, "true", this.embeddedKafka);
+        consumerProps.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
         consumerProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         DefaultKafkaConsumerFactory<K, V> consumerFactory = new DefaultKafkaConsumerFactory(
                 consumerProps, keyDeserializer, valueDeserializer
