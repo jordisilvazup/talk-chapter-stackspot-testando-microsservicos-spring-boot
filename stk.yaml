@@ -1,0 +1,26 @@
+applied_templates:
+- inputs:
+    project_artifact_id: Demo
+    project_description: Simple REST API application with Java and Spring Boot
+    project_group_id: br.com.zup.edu
+    project_name: TesteDemo
+    project_springboot_version: 2.7.2
+    project_version: 0.0.1-SNAPSHOT
+  template_data_path: java-springboot-restapi-stack/default-template
+- inputs:
+    database_name: PostgreSQL
+    package: br.com.zup.edu.Demo
+    path_code_directory: src.main.java.br.com.zup.edu.Demo
+    path_test_code_directory: src.test.java.br.com.zup.edu.Demo
+  template_data_path: java-springboot-restapi-stack/java-spring-data-jpa-plugin
+- inputs:
+    application_class_full_path: src/main/java/br/com/zup/edu/Demo/TestedemoApplication.java
+    application_path_default: src.main.java.br.com.zup.edu.Demo.TestedemoApplication
+    directory_path: src.main.java.br.com.zup.edu.Demo
+    directory_path_code: br.com.zup.edu.Demo
+    directory_test_path: src.test.java.br.com.zup.edu.Demo
+  template_data_path: java-springboot-restapi-stack/java-spring-kafka-plugin
+global_computed_inputs: {}
+global_inputs: {}
+stack: java-springboot-restapi-stack
+stack_type: app
