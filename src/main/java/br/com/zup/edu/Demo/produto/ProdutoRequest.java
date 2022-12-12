@@ -1,8 +1,5 @@
 package br.com.zup.edu.Demo.produto;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -27,12 +24,8 @@ public class ProdutoRequest {
         this.sku = sku;
     }
 
-    public Produto toModel(ProdutoRepository repository){
-        if(repository.existsBySku(sku)){
-            throw  new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Produto ja cadastrado");
-        }
-
-        return new Produto(titulo,descricao,preco,sku);
+    public Produto toModel() {
+        return new Produto(titulo, descricao, preco, sku);
     }
 
     public String getTitulo() {
