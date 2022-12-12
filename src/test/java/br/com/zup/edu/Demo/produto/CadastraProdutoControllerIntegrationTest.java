@@ -135,7 +135,7 @@ class CadastraProdutoControllerIntegrationTest {
         String payload = toJson(produtoRequest);
 
         MockHttpServletRequestBuilder request = post("/produtos")
-                .header(HttpHeaders.ACCEPT_LANGUAGE, "PT-BR")
+                .header(HttpHeaders.ACCEPT_LANGUAGE, "en")
                 .contentType(APPLICATION_JSON)
                 .content(payload);
 
