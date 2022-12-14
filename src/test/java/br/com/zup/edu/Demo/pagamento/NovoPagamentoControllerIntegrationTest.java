@@ -28,6 +28,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -49,13 +50,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class NovoPagamentoControllerIntegrationTest {
     @Value("${spring.kafka.producer.topic}")
     private String topic;
-
     @Autowired
     private KafkaIntegrationTest kafkaIntegrationTest;
-
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ObjectMapper mapper;
 
@@ -80,24 +78,17 @@ class NovoPagamentoControllerIntegrationTest {
                 status().isCreated()
         );
 
-        List<ConsumerRecord<String, PagamentoEvent>> records = kafkaIntegrationTest.getRecords(
-                topic,
-                PagamentoEvent.class,
-                Duration.ofSeconds(3)
+
+        assertEquals(
+                1,
+                kafkaIntegrationTest.countRecordsInTopic(topic, Duration.ofSeconds(3))
         );
 
-        assertThat(records)
-                .hasSize(1)
-                .extracting(ConsumerRecord::value)
-                .extracting(PagamentoEvent::getDescricao,PagamentoEvent::getValor, PagamentoEvent::getVendaId)
-                .containsExactlyInAnyOrder(
-                      new Tuple(pagamentoRequest.getDescricao(),pagamentoRequest.getValor(),pagamentoRequest.getVendaId())
-                );
     }
 
     @Test
     @DisplayName("nao deve criar um pagamento invalido")
-    void t2() throws Exception{
+    void t2() throws Exception {
         //Cenario
         PagamentoRequest pagamentoRequest = new PagamentoRequest(null, null, null);
 

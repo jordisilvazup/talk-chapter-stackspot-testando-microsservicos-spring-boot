@@ -31,10 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class CadastraProdutoControllerIntegrationTest {
     @Autowired
     private ObjectMapper mapper;
-
     @Autowired
     private ProdutoRepository repository;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -63,19 +61,16 @@ class CadastraProdutoControllerIntegrationTest {
 
         //Acao
         ResultActions response = mockMvc.perform(request);
-
         //Validacao
         response.andExpectAll(
                 status().isCreated()
         );
 
-        assertEquals(
-                1,
-                repository.findAll().size(),
+        assertEquals(1, repository.findAll().size(),
                 "deveria conter apenas um registro de produto"
         );
-
     }
+
 
     @Test
     @DisplayName("nao deve cadastrar um Produto invalido")
